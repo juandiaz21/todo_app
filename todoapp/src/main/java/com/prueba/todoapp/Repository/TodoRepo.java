@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TodoRepo extends JpaRepository<Todo, Long> {
 
-    Page<Todo> findByTitleAndUserUsername(String title, String username, Pageable pageable);
-    Page<Todo> findByTitle(String title, Pageable pageable);
-    Page<Todo> findByUserUsername(String username, Pageable pageable);
+    Page<Todo> findByTitleContainingAndUserUsername(String title, String username, Pageable pageable); // hacer un LIKE del titulo y un equals del username
+    Page<Todo> findByTitleContaining(String title, Pageable pageable); // hacer un LIKE del titulo y que el username sea null
+    Page<Todo> findByUserUsername(String username, Pageable pageable); // que el titulo sea null y hacer un equals del username
 
 }

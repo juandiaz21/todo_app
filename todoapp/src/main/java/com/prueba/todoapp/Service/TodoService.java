@@ -1,10 +1,12 @@
 package com.prueba.todoapp.Service;
 
 import com.prueba.todoapp.Model.Todo;
+import com.prueba.todoapp.Model.User;
 import com.prueba.todoapp.Repository.TodoRepo;
+import com.prueba.todoapp.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,11 +15,14 @@ public class TodoService {
     @Autowired
     private TodoRepo todoRepository;
 
+    @Autowired
+    private UserRepo userRepo;
+
     public Page<Todo> getTodos(String title, String username, Pageable pageable) {
         if (title != null && username != null) {
-            return todoRepository.findByTitleAndUserUsername(title, username, pageable);
+            return todoRepository.findByTitleContainingAndUserUsername(title, username, pageable);
         } else if (title != null) {
-            return todoRepository.findByTitle(title, pageable);
+            return todoRepository.findByTitleContaining(title, pageable);
         } else if (username != null) {
             return todoRepository.findByUserUsername(username, pageable);
         } else {
@@ -34,17 +39,24 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    public Todo updateTodo(Long id, Todo todoUpdateDetails) {
+    public Todo updateTodo(Long id, Todo todoUpdate, String username) {
         Todo todo = getTodoById(id);
+        if (!todo.getUser().getUsername().equals(username)) {
+            throw new RuntimeException("No autorizado para modificar este TODO");
+        }
 
-        todo.setTitle(todoUpdateDetails.getTitle());
-        todo.setCompleted(todoUpdateDetails.isCompleted());
-        todo.setUser(todoUpdateDetails.getUser());
+        todo.setTitle(todoUpdate.getTitle());
+        todo.setCompleted(todoUpdate.isCompleted());
 
         return todoRepository.save(todo);
     }
 
-    public void deleteTodo(Long id) {
+    public void deleteTodo(Long id, String username) {
+        Todo todo = getTodoById(id);
+        if (!todo.getUser().getUsername().equals(username)) {
+            throw new RuntimeException("No autorizado para eliminar este TODO");
+        }
+        
         todoRepository.deleteById(id);
     }
 }

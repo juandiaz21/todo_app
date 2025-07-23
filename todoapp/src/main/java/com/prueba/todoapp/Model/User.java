@@ -15,5 +15,5 @@ public class User {
     private String password;
 
     @Embedded
-    private Adress adress;
+    private Address address;
 }
