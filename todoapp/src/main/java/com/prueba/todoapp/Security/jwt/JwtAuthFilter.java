@@ -1,6 +1,5 @@
 package com.prueba.todoapp.Security.jwt;
 
-import com.prueba.todoapp.Security.jwt.JwtUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import org.springframework.security.authentication.*;

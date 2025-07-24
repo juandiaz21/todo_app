@@ -1,9 +1,7 @@
 package com.prueba.todoapp.Service;
 
 import com.prueba.todoapp.Model.Todo;
-import com.prueba.todoapp.Model.User;
 import com.prueba.todoapp.Repository.TodoRepo;
-import com.prueba.todoapp.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -13,9 +11,6 @@ public class TodoService {
 
     @Autowired
     private TodoRepo todoRepository;
-
-    @Autowired
-    private UserRepo userRepo;
 
     public Page<Todo> getTodos(String title, String username, Pageable pageable) {
         if (title != null && username != null) {
