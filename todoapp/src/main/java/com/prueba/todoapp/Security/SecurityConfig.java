@@ -21,26 +21,25 @@ public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
 
     @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/users/login", "/users/register").permitAll()
-            .anyRequest().authenticated()
-        )
-        .sessionManagement(sess -> sess
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        );
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/login", "/register", "/api/users/login", "/api/users/register").permitAll()
+                .anyRequest().authenticated()
+            )
+            .sessionManagement(sess -> sess
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-    http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
 
-    return http.build();
-}
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
-        throws Exception {
-        return configuration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
     @Bean
@@ -48,3 +47,4 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         return new BCryptPasswordEncoder();
     }
 }
+

@@ -55,7 +55,7 @@ public class UserRESTController {
         }
     }
 
-    @PostMapping("/createUser")
+    @PostMapping("/register")
     public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
         if (user.getUsername() == null || user.getPassword() == null) {
             return ResponseEntity.badRequest().body("Username y password son requeridos");

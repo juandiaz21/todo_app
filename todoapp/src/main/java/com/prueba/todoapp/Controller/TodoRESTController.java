@@ -39,6 +39,10 @@ public class TodoRESTController {
             @AuthenticationPrincipal UserDetails userDetails) {
         Todo todo = todoService.getTodoById(id);
 
+        if (todo == null) {
+            return ResponseEntity.status(404).body("Todo not found");
+        }
+
         if (!todo.getUser().getUsername().equals(userDetails.getUsername())) {
             return ResponseEntity.status(403).body("Access denied");
         }
@@ -48,9 +52,11 @@ public class TodoRESTController {
 
     @PostMapping("/createTODO")
     public ResponseEntity<?> createTodo(@RequestBody Todo todo,
-                                        @AuthenticationPrincipal UserDetails userDetails) {
+            @AuthenticationPrincipal UserDetails userDetails) {
         User user = userRepo.findByUsername(userDetails.getUsername()).orElse(null);
-        if (user == null) return ResponseEntity.status(401).body("User not authenticated");
+        if (user == null) {
+            return ResponseEntity.status(401).body("User not authenticated");
+        }
 
         if (todo.getTitle() == null || todo.getTitle().isBlank() || todo.getTitle().length() > 200) {
             return ResponseEntity.badRequest().body("Title must be non-empty and under 200 characters");
@@ -62,25 +68,25 @@ public class TodoRESTController {
     }
 
     @PutMapping("/modifyTODO/{id}")
-public ResponseEntity<?> updateTodo(@PathVariable Long id,
-                                    @RequestBody Todo todo,
-                                    @AuthenticationPrincipal UserDetails userDetails) {
-    try {
-        Todo updated = todoService.updateTodo(id, todo, userDetails.getUsername());
-        return ResponseEntity.ok(updated);
-    } catch (RuntimeException e) {
-        return ResponseEntity.status(403).body(e.getMessage());
+    public ResponseEntity<?> updateTodo(@PathVariable Long id,
+            @RequestBody Todo todo,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        try {
+            Todo updated = todoService.updateTodo(id, todo, userDetails.getUsername());
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(403).body(e.getMessage());
+        }
     }
-}
 
-@DeleteMapping("/deleteTODO/{id}")
-public ResponseEntity<?> deleteTodo(@PathVariable Long id,
-                                    @AuthenticationPrincipal UserDetails userDetails) {
-    try {
-        todoService.deleteTodo(id, userDetails.getUsername());
-        return ResponseEntity.ok().build();
-    } catch (RuntimeException e) {
-        return ResponseEntity.status(403).body(e.getMessage());
+    @DeleteMapping("/deleteTODO/{id}")
+    public ResponseEntity<?> deleteTodo(@PathVariable Long id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        try {
+            todoService.deleteTodo(id, userDetails.getUsername());
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(403).body(e.getMessage());
+        }
     }
-}
 }

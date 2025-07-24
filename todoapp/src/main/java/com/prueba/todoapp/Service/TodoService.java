@@ -6,7 +6,6 @@ import com.prueba.todoapp.Repository.TodoRepo;
 import com.prueba.todoapp.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +27,10 @@ public class TodoService {
         } else {
             return todoRepository.findAll(pageable);
         }
+    }
+
+    public Page<Todo> findByTitleContaining(String title, Pageable pageable) {
+        return todoRepository.findByTitleContaining(title, pageable);
     }
 
     public Todo getTodoById(Long id) {
