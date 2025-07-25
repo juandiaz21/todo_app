@@ -45,7 +45,7 @@ public class TodoRESTControllerTest {
     @WithMockUser(username = "juan")
     void shouldReturnTodoIfOwner() throws Exception {
         User user = User.builder().username("juan").build();
-        Todo todo = Todo.builder().id(1L).title("Prueba").user(user).build();
+        Todo todo = Todo.builder().title("Prueba").user(user).build();
 
         Mockito.when(todoService.getTodoById(1L)).thenReturn(todo);
 

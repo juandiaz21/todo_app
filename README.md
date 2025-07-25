@@ -4,9 +4,7 @@
 
 Esta es una TODO_APP para una prueba técnica construida con Spring Boot, JWT para autenticación y Swagger para documentación de la API.
 
-# Requisitos
-
-Antes de iniciar, asegúrate de tener instalado:
+# Prerrequisitos
 
 - Java 17+
 
@@ -18,9 +16,16 @@ Antes de iniciar, asegúrate de tener instalado:
 
 # Configuración
 
+- Primero, clona el repositorio y entra en el directorio del proyecto:
+
+```bash
+git clone https://github.com/juandica21/todo_app.git
+cd todo_app
+```
+
 ## Base de Datos:
 
-Crea una base de datos llamada todo_db en tu instancia de MariaDB:
+Crea una base de datos llamada todo_db:
 
 ```sql
 CREATE DATABASE todo_db;
@@ -63,6 +68,8 @@ La aplicación utiliza JWT para proteger los endpoints. No se usa autenticación
 - Registro: POST /api/users/register
 
 - Login: POST /api/users/login
+
+- OLogin por formulario: http://localhost:8080/login
 
 # Swagger (API REST)
 
