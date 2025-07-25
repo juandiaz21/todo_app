@@ -55,7 +55,7 @@ public class TodoRESTControllerTest {
     }
 
     @Test
-    @DisplayName("Retorna 404 si el ID no existe")
+    @DisplayName("404 si el ID no existe")
     @WithMockUser(username = "juan")
     void shouldReturn404IfTodoNotFound() throws Exception {
         Mockito.when(todoService.getTodoById(999L)).thenReturn(null);
@@ -65,7 +65,7 @@ public class TodoRESTControllerTest {
     }
 
     @Test
-    @DisplayName("Retorna 403 si el usuario no es el dueño del Todo")
+    @DisplayName("403 si el usuario no es el dueño del Todo")
     @WithMockUser(username = "otroUsuario")
     void shouldReturn403IfUserIsNotOwner() throws Exception {
         User user = User.builder().username("juan").build();

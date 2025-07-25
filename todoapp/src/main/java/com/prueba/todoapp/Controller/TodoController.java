@@ -97,14 +97,13 @@ public class TodoController {
                 redirectAttributes.addFlashAttribute("errorMessage", "No puedes modificar un TODO que no es tuyo.");
                 return "redirect:/todos";
             }
-            todoService.updateTodo(todo.getId(), todo, userDetails.getUsername());
+            todoService.updateTodo(todo.getId(), todo.getTitle(), todo.isCompleted(), userDetails.getUsername());
         } else {
             todoService.createTodo(todo);
         }
 
         return "redirect:/todos";
     }
-
 
     @PostMapping("/delete/{id}")
     public String deleteTodo(@PathVariable Long id,
@@ -118,4 +117,5 @@ public class TodoController {
         todoService.deleteTodo(id, userDetails.getUsername());
         return "redirect:/todos";
     }
+    
 }

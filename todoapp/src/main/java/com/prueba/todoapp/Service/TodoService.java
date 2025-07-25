@@ -31,21 +31,21 @@ public class TodoService {
 
     public Todo getTodoById(Long id) {
         return todoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("TO-DO not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("TODO no encontrado con ID: " + id));
     }
 
     public Todo createTodo(Todo todo) {
         return todoRepository.save(todo);
     }
 
-    public Todo updateTodo(Long id, Todo todoUpdate, String username) {
+    public Todo updateTodo(Long id, String titleUpdate, boolean completedUpdate, String username) {
         Todo todo = getTodoById(id);
         if (!todo.getUser().getUsername().equals(username)) {
             throw new RuntimeException("No autorizado para modificar este TODO");
         }
 
-        todo.setTitle(todoUpdate.getTitle());
-        todo.setCompleted(todoUpdate.isCompleted());
+        todo.setTitle(titleUpdate);
+        todo.setCompleted(completedUpdate);
         todo.setUser(userRepo.findByUsername(username)
             .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + username)));
 
