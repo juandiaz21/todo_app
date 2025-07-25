@@ -69,7 +69,7 @@ La aplicación utiliza JWT para proteger los endpoints. No se usa autenticación
 
 - Login: POST /api/users/login
 
-- OLogin por formulario: http://localhost:8080/login
+- O login por formulario: http://localhost:8080/login
 
 # Swagger (API REST)
 
