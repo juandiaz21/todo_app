@@ -1,8 +1,8 @@
-package com.prueba.todoapp.Controller;
+package com.prueba.todoapp.controller;
 
-import com.prueba.todoapp.Model.User;
-import com.prueba.todoapp.Repository.UserRepo;
-import com.prueba.todoapp.Security.jwt.JwtUtils;
+import com.prueba.todoapp.model.User;
+import com.prueba.todoapp.config.jwt.JwtUtils;
+import com.prueba.todoapp.repository.UserRepo;
 
 import jakarta.validation.Valid;
 

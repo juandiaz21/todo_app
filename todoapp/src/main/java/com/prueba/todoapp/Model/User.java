@@ -1,4 +1,4 @@
-package com.prueba.todoapp.Model;
+package com.prueba.todoapp.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

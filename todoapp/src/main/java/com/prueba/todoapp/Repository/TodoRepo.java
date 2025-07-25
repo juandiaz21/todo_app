@@ -1,6 +1,6 @@
-package com.prueba.todoapp.Repository;
+package com.prueba.todoapp.repository;
 
-import com.prueba.todoapp.Model.Todo;
+import com.prueba.todoapp.model.Todo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

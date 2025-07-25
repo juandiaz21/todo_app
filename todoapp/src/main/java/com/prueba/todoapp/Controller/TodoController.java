@@ -1,8 +1,8 @@
-package com.prueba.todoapp.Controller;
+package com.prueba.todoapp.controller;
 
-import com.prueba.todoapp.Model.Todo;
-import com.prueba.todoapp.Repository.UserRepo;
-import com.prueba.todoapp.Service.TodoService;
+import com.prueba.todoapp.model.Todo;
+import com.prueba.todoapp.service.TodoService;
+import com.prueba.todoapp.repository.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;

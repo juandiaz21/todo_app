@@ -1,11 +1,11 @@
 package com.prueba.todoapp.service;
 
-import com.prueba.todoapp.Model.Address;
-import com.prueba.todoapp.Model.Todo;
-import com.prueba.todoapp.Model.User;
-import com.prueba.todoapp.Repository.TodoRepo;
-import com.prueba.todoapp.Repository.UserRepo;
-import com.prueba.todoapp.Service.TodoService;
+import com.prueba.todoapp.model.Address;
+import com.prueba.todoapp.model.Todo;
+import com.prueba.todoapp.model.User;
+import com.prueba.todoapp.service.TodoService;
+import com.prueba.todoapp.repository.TodoRepo;
+import com.prueba.todoapp.repository.UserRepo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -67,7 +67,7 @@ class TodoServiceTest {
         String todoTitleCont = "Acar";
         String todoTitle = "Acariciar";
 
-        Page<Todo> result = todoService.findByTitleContaining(todoTitleCont, Pageable.unpaged());
+        Page<Todo> result = todoRepo.findByTitleContaining(todoTitleCont, Pageable.unpaged());
 
         assertFalse(result.isEmpty(), "No se encontró ningún Todo");
 

@@ -1,7 +1,8 @@
-package com.prueba.todoapp.Security.jwt;
+package com.prueba.todoapp.config.jwt;
 
-import com.prueba.todoapp.Model.User;
-import com.prueba.todoapp.Repository.UserRepo;
+import com.prueba.todoapp.model.User;
+import com.prueba.todoapp.repository.UserRepo;
+
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 

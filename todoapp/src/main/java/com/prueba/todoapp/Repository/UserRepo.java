@@ -1,6 +1,6 @@
-package com.prueba.todoapp.Repository;
+package com.prueba.todoapp.repository;
 
-import com.prueba.todoapp.Model.User;
+import com.prueba.todoapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
-package com.prueba.todoapp.Security;
+package com.prueba.todoapp.config;
 
-import com.prueba.todoapp.Security.jwt.JwtAuthFilter;
-import com.prueba.todoapp.Security.jwt.CustomUserDetailsService;
+import com.prueba.todoapp.config.jwt.JwtAuthFilter;
+import com.prueba.todoapp.config.jwt.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.*;
 import org.springframework.core.annotation.Order;

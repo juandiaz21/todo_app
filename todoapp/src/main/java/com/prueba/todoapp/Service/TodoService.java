@@ -1,7 +1,9 @@
-package com.prueba.todoapp.Service;
+package com.prueba.todoapp.service;
 
-import com.prueba.todoapp.Model.Todo;
-import com.prueba.todoapp.Repository.TodoRepo;
+import com.prueba.todoapp.model.Todo;
+import com.prueba.todoapp.repository.TodoRepo;
+import com.prueba.todoapp.repository.UserRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ public class TodoService {
 
     @Autowired
     private TodoRepo todoRepository;
+
+    @Autowired
+    private UserRepo userRepo;
 
     public Page<Todo> getTodos(String title, String username, Pageable pageable) {
         if (title != null && username != null) {
@@ -22,10 +27,6 @@ public class TodoService {
         } else {
             return todoRepository.findAll(pageable);
         }
-    }
-
-    public Page<Todo> findByTitleContaining(String title, Pageable pageable) {
-        return todoRepository.findByTitleContaining(title, pageable);
     }
 
     public Todo getTodoById(Long id) {
@@ -45,6 +46,8 @@ public class TodoService {
 
         todo.setTitle(todoUpdate.getTitle());
         todo.setCompleted(todoUpdate.isCompleted());
+        todo.setUser(userRepo.findByUsername(username)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + username)));
 
         return todoRepository.save(todo);
     }

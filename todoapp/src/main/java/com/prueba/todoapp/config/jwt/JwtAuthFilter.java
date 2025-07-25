@@ -1,4 +1,4 @@
-package com.prueba.todoapp.Security.jwt;
+package com.prueba.todoapp.config.jwt;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

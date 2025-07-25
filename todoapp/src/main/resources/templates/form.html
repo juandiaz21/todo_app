@@ -1,51 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title th:text="${todo.id != null} ? 'Editar Tarea' : 'Nueva Tarea'">Formulario</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-        <style>
-            body {
-                background-color: #f8f9fa;
-            }
-            .container {
-                max-width: 600px;
-                margin-top: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container bg-white p-4 rounded shadow">
-            <h2 class="text-center mb-4" th:text="${todo.id != null} ? 'Editar Tarea' : 'Nueva Tarea'"></h2>
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${todo.id != null} ? 'Editar Tarea' : 'Nueva Tarea'">Formulario</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container bg-white p-4 rounded shadow">
+        <h2 class="text-center mb-4" th:text="${todo.id != null} ? 'Editar Tarea' : 'Nueva Tarea'"></h2>
 
-            <form th:action="@{/todos/save}" th:object="${todo}" method="post">
-                <input type="hidden" th:field="*{id}" />
+        <form th:action="@{/todos/save}" th:object="${todo}" method="post">
+            <input type="hidden" th:field="*{id}" />
 
-                <div class="mb-3">
-                    <label for="title" class="form-label">Título</label>
-                    <input type="text" id="title" th:field="*{title}" class="form-control" placeholder="Escribe un título" required>
-                </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Título</label>
+                <input type="text" id="title" th:field="*{title}" class="form-control" placeholder="Escribe un título" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="completed" class="form-label">¿Completado?</label>
-                    <select id="completed" th:field="*{completed}" class="form-select">
-                        <option th:value="false">No</option>
-                        <option th:value="true">Sí</option>
-                    </select>
-                </div>
+            <div class="mb-3">
+                <label for="completed" class="form-label">¿Completado?</label>
+                <select id="completed" th:field="*{completed}" class="form-select">
+                    <option th:value="false">No</option>
+                    <option th:value="true">Sí</option>
+                </select>
+            </div>
 
-                <div class="mb-3">
-                    <label for="user.id" class="form-label">Usuario</label>
+            <div class="mb-3">
+                <label class="form-label">Usuario</label>
+
+                <div th:if="${todo.id == null}">
                     <select id="user.id" th:field="*{user.id}" class="form-select" required>
                         <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">Usuario</option>
                     </select>
                 </div>
 
-                <div class="d-flex justify-content-between">
-                    <a href="/todos" class="btn btn-secondary">← Volver</a>
-                    <button type="submit" class="btn btn-primary" th:text="${todo.id != null} ? 'Actualizar' : 'Crear'"></button>
+                <div th:if="${todo.id != null}">
+                    <input type="hidden" th:field="*{user.id}" />
+                    <input type="text" class="form-control" th:value="${todo.user.username}" readonly />
                 </div>
-            </form>
-        </div>
-    </body>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a href="/todos" class="btn btn-secondary">← Volver</a>
+                <button type="submit" class="btn btn-primary" th:text="${todo.id != null} ? 'Actualizar' : 'Crear'"></button>
+            </div>
+        </form>
+    </div>
+</body>
 </html>

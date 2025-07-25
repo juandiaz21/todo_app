@@ -1,11 +1,11 @@
 package com.prueba.todoapp.controller;
 
-import com.prueba.todoapp.Model.Todo;
-import com.prueba.todoapp.Model.User;
-import com.prueba.todoapp.Service.TodoService;
-import com.prueba.todoapp.Repository.UserRepo;
-import com.prueba.todoapp.Security.jwt.JwtUtils;
-import com.prueba.todoapp.Security.jwt.CustomUserDetailsService;
+import com.prueba.todoapp.model.Todo;
+import com.prueba.todoapp.model.User;
+import com.prueba.todoapp.service.TodoService;
+import com.prueba.todoapp.repository.UserRepo;
+import com.prueba.todoapp.config.jwt.JwtUtils;
+import com.prueba.todoapp.config.jwt.CustomUserDetailsService;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

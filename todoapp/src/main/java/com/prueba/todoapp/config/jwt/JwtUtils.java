@@ -1,4 +1,4 @@
-package com.prueba.todoapp.Security.jwt;
+package com.prueba.todoapp.config.jwt;
 
 import java.security.Key;
 import java.util.Date;
