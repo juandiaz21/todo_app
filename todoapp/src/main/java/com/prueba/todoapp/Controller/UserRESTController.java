@@ -2,6 +2,8 @@ package com.prueba.todoapp.controller;
 
 import com.prueba.todoapp.model.User;
 import com.prueba.todoapp.config.jwt.JwtUtils;
+import com.prueba.todoapp.dto.CreateTodoDTO;
+import com.prueba.todoapp.dto.LoginUserDTO;
 import com.prueba.todoapp.repository.UserRepo;
 
 import jakarta.validation.Valid;
@@ -37,10 +39,10 @@ public class UserRESTController {
     private UserDetailsService userDetailsService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
+    public ResponseEntity<?> login(@RequestBody @Valid LoginUserDTO loginData) {
         try {
-            String username = loginData.get("username");
-            String password = loginData.get("password");
+            String username = loginData.getUsername();
+            String password = loginData.getPassword();
 
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)

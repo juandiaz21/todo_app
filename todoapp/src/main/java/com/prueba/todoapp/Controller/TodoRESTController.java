@@ -1,6 +1,7 @@
 package com.prueba.todoapp.controller;
 
 import com.prueba.todoapp.dto.CreateTodoDTO;
+import com.prueba.todoapp.dto.UpdateTodoDTO;
 import com.prueba.todoapp.model.Todo;
 import com.prueba.todoapp.model.User;
 import com.prueba.todoapp.service.TodoService;
@@ -82,7 +83,7 @@ public class TodoRESTController {
 
     @PutMapping("/modifyTODO/{id}")
     public ResponseEntity<?> updateTodo(@PathVariable Long id,
-            @Valid @RequestBody TodoUpdateRequest body,
+            @Valid @RequestBody UpdateTodoDTO body,
             @AuthenticationPrincipal UserDetails userDetails) {
         try {
             String title = body.getTitle();
@@ -105,27 +106,6 @@ public class TodoRESTController {
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
             return ResponseEntity.status(403).body(e.getMessage());
-        }
-    }
-
-    public class TodoUpdateRequest {
-        private String title;
-        private boolean completed;
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public boolean isCompleted() {
-            return completed;
-        }
-
-        public void setCompleted(boolean completed) {
-            this.completed = completed;
         }
     }
 
