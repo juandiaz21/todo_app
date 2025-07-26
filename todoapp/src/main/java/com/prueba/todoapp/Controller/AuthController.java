@@ -18,6 +18,11 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @GetMapping("/")
+    public String redirectToLogin() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/login")
     public String login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "logout", required = false) String logout,
@@ -51,4 +56,5 @@ public class AuthController {
         userRepo.save(user);
         return "redirect:/login?registered";
     }
+    
 }
