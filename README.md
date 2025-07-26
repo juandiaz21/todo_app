@@ -6,13 +6,11 @@ Esta es una TODO_APP para una prueba técnica construida con Spring Boot, JWT pa
 
 # Prerrequisitos
 
-- Java 17+
+- Java 17
 
 - Maven 3.6+
 
 - MariaDB/MySQL
-
-- Navegador web y/o cliente REST (Postman, etc.)
 
 # Configuración
 
@@ -67,7 +65,7 @@ La aplicación utiliza JWT para proteger los endpoints. No se usa autenticación
 
 - Registro: POST /api/users/register
 
-- Login: POST /api/users/login
+- Login: POST /api/users/login (recibes JWT)
 
 - O login por formulario: http://localhost:8080/login
 
